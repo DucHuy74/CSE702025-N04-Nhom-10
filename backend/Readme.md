@@ -7,7 +7,7 @@
 
 ### POST /api/v1/users/register
 
-**Mô tả:** Đăng ký người dùng mới. Trả về token và thông tin user sau khi đăng ký thành công.
+**Mô tả:** Đăng ký người dùng mới. Trả về thông tin user sau khi đăng ký thành công.
 
 - Request Body:
 
