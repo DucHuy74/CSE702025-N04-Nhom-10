@@ -13,8 +13,8 @@
 
 ```json
 {
-  "username": "newuser",
-  "email": "newuser@example.com",
+  "username": "test1",
+  "email": "test1@example.com",
   "password": "securePassword123"
 }
 ```
@@ -23,12 +23,11 @@
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "user456",
-    "username": "newuser",
-    "email": "newuser@example.com"
-  }
+    "_id": "682d9b8af609b7322dbd7211",
+    "email": "test1@example.com",
+    "username": "test1",
+    "createdAt": "2025-05-21T09:23:22.385Z",
+    "updatedAt": "2025-05-21T09:23:22.385Z"
 }
 ```
 
@@ -50,8 +49,8 @@
 
 ```json
 {
-  "username": "user1",
-  "password": "pass123"
+  "email": "test1@example.com",
+  "password": "securePassword123"
 }
 ```
 
@@ -59,12 +58,13 @@
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "user123",
-    "username": "user1",
-    "email": "user1@example.com"
-  }
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODJkOWI4YWY2MDliNzMyMmRiZDcyMTEiLCJlbWFpbCI6InRlc3QxQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ3ODE5NzQ5LCJleHAiOjE3NDc4MjMzNDl9.haYFQ6-kGy7LPq04jo8QbZsF3QKdAn4Nj3jM7TcuMkM",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODJkOWI4YWY2MDliNzMyMmRiZDcyMTEiLCJlbWFpbCI6InRlc3QxQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ3ODE5NzQ5LCJleHAiOjE3NDkwMjkzNDl9._8m6jHBgpEAAFlzuYGj1Swbm87CfszoGJvaBQEDB9b4",
+    "_id": "682d9b8af609b7322dbd7211",
+    "email": "test1@example.com",
+    "username": "test1",
+    "createdAt": "2025-05-21T09:23:22.385Z",
+    "updatedAt": "2025-05-21T09:23:22.385Z"
 }
 ```
 
@@ -74,58 +74,11 @@
 
 **Mô tả:** Làm mới token nếu token cũ sắp hết hạn hoặc đã hết hạn.
 
-- Response thành công (200 OK):
-
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
----
-
-## User API
-
-### GET /api/v1/users/me
-
-**Mô tả:** Lấy thông tin user hiện tại.
-
-- Headers:
-
-```makefile
-Authorization: Bearer <token>
-```
-
-- Response thành công (200 OK):
-
-```json
-{
-  "id": "user123",
-  "username": "user1",
-  "email": "user1@example.com"
-}
-```
-
----
-
-### PUT /api/v1/users/me
-
-**Mô tả:** Cập nhật thông tin user (username, email, password)
-
-- Headers:
-
-```makefile
-Authorization: Bearer <token>
-Content-Type: application/json
-```
-
 - Request Body:
 
 ```json
 {
-  "username": "newusername",
-  "email": "newemail@example.com",
-  "password": "newpassword123"
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODJkOWI4YWY2MDliNzMyMmRiZDcyMTEiLCJlbWFpbCI6InRlc3QxQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ3ODE5OTc4LCJleHAiOjE3NDkwMjk1Nzh9.mB6muXHlKWVp6Z0UkIH9oNjJ2E0mE9A2wvNU_mxL7Tw"
 }
 ```
 
@@ -133,11 +86,11 @@ Content-Type: application/json
 
 ```json
 {
-  "id": "user123",
-  "username": "newusername",
-  "email": "newemail@example.com"
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODJkOWI4YWY2MDliNzMyMmRiZDcyMTEiLCJlbWFpbCI6InRlc3QxQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ3ODIwMTQ1LCJleHAiOjE3NDc4MjM3NDV9.4O2xiZUf1JX6Zxw5h3Wo6tGreDzApLSa8XUIcDaKYZA"
 }
 ```
+
+---
 
 ---
 
@@ -157,22 +110,24 @@ Authorization: Bearer <token>
 
 ```json
 [
-  {
-    "id": "task001",
-    "userId": "user123",
-    "title": "Task 1",
-    "description": "Mô tả công việc",
-    "subtasks": [
-      {
-        "title": "Subtask 1",
-        "subtaskDes": "Mô tả subtask 1"
-      }
-    ],
-    "createAt": "2025-05-16T08:30:00Z",
-    "dueDate": "2025-05-16T08:35:00Z",
-    "type": "Meeting",
-    "isSuccess": false
-  }
+    {
+        "_id": "682d9f4cf609b7322dbd7215",
+        "userId": "682d9b8af609b7322dbd7211",
+        "title": "Task mới",
+        "description": "Mô tả task mới",
+        "subtasks": [
+            {
+                "title": "Subtask 1",
+                "subtaskDes": "Mô tả chi tiết subtask",
+                "_id": "682d9f4cf609b7322dbd7216"
+            }
+        ],
+        "createAt": "2025-05-16T08:30:00Z",
+        "dueDate": "2025-05-16T08:35:00Z",
+        "type": "Meeting",
+        "isSuccess": false,
+        "__v": 0
+    }
 ]
 ```
 
@@ -212,20 +167,22 @@ Content-Type: application/json
 
 ```json
 {
-  "id": "task003",
-  "userId": "user123",
-  "title": "Task mới",
-  "description": "Mô tả task mới",
-  "subtasks": [
-    {
-      "title": "Subtask 1",
-      "subtaskDes": "Mô tả chi tiết subtask"
-    }
-  ],
-  "createAt": "2025-05-16T08:30:00Z",
-  "dueDate": "2025-05-16T08:35:00Z",
-  "type": "Meeting",
-  "isSuccess": false
+    "userId": "682d9b8af609b7322dbd7211",
+    "title": "Task mới",
+    "description": "Mô tả task mới",
+    "subtasks": [
+        {
+            "title": "Subtask 1",
+            "subtaskDes": "Mô tả chi tiết subtask",
+            "_id": "682d9f4cf609b7322dbd7216"
+        }
+    ],
+    "createAt": "2025-05-16T08:30:00Z",
+    "dueDate": "2025-05-16T08:35:00Z",
+    "type": "Meeting",
+    "isSuccess": false,
+    "_id": "682d9f4cf609b7322dbd7215",
+    "__v": 0
 }
 ```
 
@@ -269,24 +226,27 @@ Content-Type: application/json
 
 ```json
 {
-  "id": "task003",
-  "userId": "user123",
-  "title": "Task đã sửa",
-  "description": "Mô tả cập nhật",
-  "subtasks": [
-    {
-      "title": "Subtask sửa",
-      "subtaskDes": "Mô tả subtask sửa"
-    },
-    {
-      "title": "Subtask mới",
-      "subtaskDes": "Mô tả subtask mới"
-    }
-  ],
-  "createAt": "2025-05-16T08:35:00Z",
-  "dueDate": "2025-05-16T08:50:00Z",
-  "type": "Travel",
-  "isSuccess": true
+    "_id": "682d9f4cf609b7322dbd7215",
+    "userId": "682d9b8af609b7322dbd7211",
+    "title": "Task đã sửa",
+    "description": "Mô tả cập nhật",
+    "subtasks": [
+        {
+            "title": "Subtask sửa",
+            "subtaskDes": "Mô tả subtask sửa",
+            "_id": "682d9fc9f609b7322dbd721a"
+        },
+        {
+            "title": "Subtask mới",
+            "subtaskDes": "Mô tả subtask mới",
+            "_id": "682d9fc9f609b7322dbd721b"
+        }
+    ],
+    "createAt": "2025-05-16T08:35:00Z",
+    "dueDate": "2025-05-16T08:50:00Z",
+    "type": "Travel",
+    "isSuccess": true,
+    "__v": 0
 }
 ```
 
@@ -304,24 +264,5 @@ Authorization: Bearer <token>
 
 - Response thành công (204 No Content): Không trả về nội dung.
 
----
-
-## Tổng kết cấu trúc định tuyến
-
-```js
-// app.js
-app.use('/api/v1', APIs_v1)
-
-// APIs_v1
-Router.use('/users', userRoute)
-Router.use('/tasks', taskRoute)
-```
-
----
-
-## Ghi chú
-
-- Tất cả các route yêu cầu xác thực (`Authorization: Bearer <token>`) đều dùng middleware `authMiddleware.isAuthorized`.
-- Request body đều cần header `Content-Type: application/json`.
 
 ---
